@@ -37,16 +37,17 @@ CTWL *ctwl_create_random(unsigned int size){
     }
 
 
-    ctwl->cur = first_TWN;
     // Create all other TWN
+    ctwl->cur = first_TWN;
     for (int i = 0; i < size; i++){
         ctwl->cur->next = malloc(sizeof(TWN));
         ctwl->cur->next->prev = ctwl->cur;
         ctwl->cur = ctwl->cur->next;
     }
 
-    // Link the end to the start
-    ctwl->cur->next =
+    // Link the end with the start
+    ctwl->cur->next = first_TWN;
+    first_TWN->prev = ctwl->cur;
 
     return ctwl;
 }
