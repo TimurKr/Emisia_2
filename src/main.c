@@ -39,6 +39,10 @@ CTWL *ctwl_create_empty(void){
 
 CTWL *ctwl_create_random(unsigned int size){
 
+    if (size == 0){
+        return ctwl_create_empty();
+    }
+
     // Create structure for ctwl
     CTWL *ctwl = malloc(sizeof(CTWL));
     if (ctwl == NULL){
@@ -85,21 +89,30 @@ void ctwl_print(CTWL *list){
         return;
     }
 
-    printf("Cursor: %f\n", list->cur->data);
+    printf("Cursor: \t\t%f\n", list->cur->data);
 
     TWN *aux_cur = list->cur->next;
     unsigned short int i = 1;
     while (aux_cur != list->cur){
-        printf("Cursor + %d: %f\n", i, aux_cur->data);
+        printf("Cursor + %d: \t%f\n", i, aux_cur->data);
         aux_cur = aux_cur->next;
         i++;
     }
 }
 
 
+void ctwl_cur_step_right(CTWL *list){
+    list->cur = list->cur->next;
+}
+
+void ctwl_cur_step_left(CTWL *list){
+    list->cur = list->cur->prev;
+}
+
+
 
 int main() {
-    CTWL *list = ctwl_create_random(5);
+    CTWL *list = ctwl_create_random(0);
     ctwl_print(list);
     ctwl_destroy(list);
 }
