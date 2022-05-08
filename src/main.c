@@ -53,7 +53,13 @@ CTWL *ctwl_create_random(unsigned int size){
 }
 
 void ctwl_destroy(CTWL *list){
-
+    TWN *aux_cur = list->cur;
+    while (aux_cur->next != list->cur){
+        aux_cur = aux_cur->next;
+        free(aux_cur->prev);
+    }
+    free(aux_cur);
+    free(list);
 }
 
 void ctwl_print(CTWL *list){
