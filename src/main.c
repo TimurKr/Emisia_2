@@ -120,7 +120,22 @@ void ctwl_print(CTWL *list){
 
 
 TWN *ctwl_insert_left(CTWL* list, float val){
+    // Allocate memory
+    TWN *ptr = malloc(sizeof(TWN));
+    if (ptr == 0){
+        return 0;
+    }
 
+    // Setup the TWN
+    ptr->data = val;
+    ptr->prev = list->cur->prev;
+    ptr->next = list->cur;
+
+    // Correct pointers to the TWN
+    list->cur->prev->next = ptr;
+    list->cur->prev = ptr;
+
+    return ptr;
 }
 
 TWN *ctwl_insert_right(CTWL* list, float val){
