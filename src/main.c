@@ -72,7 +72,7 @@ CTWL *ctwl_create_random(unsigned int size){
     if (first_TWN == NULL){
         return NULL;
     }
-    first_TWN->data = rand();
+    first_TWN->data = (float) rand();
 
     // Create all other TWNs
     ctwl->cur = first_TWN;
@@ -89,7 +89,7 @@ CTWL *ctwl_create_random(unsigned int size){
 
         ctwl->cur->next->prev = ctwl->cur;
         ctwl_cur_step_right(ctwl);
-        ctwl->cur->data = rand();
+        ctwl->cur->data = (float) rand();
     }
 
     // Link the end with the start
@@ -126,15 +126,27 @@ TWN *ctwl_insert_left(CTWL* list, float val){
         return 0;
     }
 
-    // Setup the TWN
-    ptr->data = val;
-    ptr->prev = list->cur->prev;
-    ptr->next = list->cur;
+    // Protection against empty lists
+    if (list->cur == NULL){
+        // Set up the TWN
+        ptr->data = val;
+        ptr->prev = ptr;
+        ptr->next = ptr;
 
-    // Correct pointers to the TWN
-    list->cur->prev->next = ptr;
-    list->cur->prev = ptr;
+        // Set cursor
+        list->cur = ptr;
+    }
 
+    else {
+        // Set up the TWN
+        ptr->data = val;
+        ptr->prev = list->cur->prev;
+        ptr->next = list->cur;
+
+        // Correct neighbouring TWN pointers
+        list->cur->prev->next = ptr;
+        list->cur->prev = ptr;
+    }
     return ptr;
 }
 
@@ -145,16 +157,33 @@ TWN *ctwl_insert_right(CTWL* list, float val){
         return 0;
     }
 
-    // Setup the TWN
-    ptr->data = val;
-    ptr->prev = list->cur;
-    ptr->next = list->cur->next;
+    // Protection against empty lists
+    if (list->cur == NULL){
+        // Set up the TWN
+        ptr->data = val;
+        ptr->prev = ptr;
+        ptr->next = ptr;
 
-    // Correct pointers to the TWN
-    list->cur->next->prev = ptr;
-    list->cur->next = ptr;
+        // Set cursor
+        list->cur = ptr;
+    }
 
+    else {
+        // Set up the TWN
+        ptr->data = val;
+        ptr->prev = list->cur;
+        ptr->next = list->cur->next;
+
+        // Correct neighbouring TWN pointers
+        list->cur->next->prev = ptr;
+        list->cur->next = ptr;
+    }
     return ptr;
+}
+
+
+char ctwl_delete(CTWL *list){
+
 }
 
 
