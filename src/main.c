@@ -13,6 +13,9 @@ typedef struct{
 
 CTWL *ctwl_create_empty(void){
     CTWL *ctwl = malloc(sizeof(CTWL));
+    if (ctwl == NULL){
+        return NULL;
+    }
     ctwl->cur = NULL;
     return ctwl;
 }
