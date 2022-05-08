@@ -35,14 +35,15 @@ CTWL *ctwl_create_random(unsigned int size){
     if (first_TWN == NULL){
         return NULL;
     }
+    first_TWN->data = rand();
 
     // Create all other TWNs
     ctwl->cur = first_TWN;
     for (int i = 0; i < size; i++){
         ctwl->cur->next = malloc(sizeof(TWN));              // Needs protections against error with destroy
-        ctwl->cur->data = rand();
         ctwl->cur->next->prev = ctwl->cur;
         ctwl->cur = ctwl->cur->next;
+        ctwl->cur->data = rand();
     }
 
     // Link the end with the start
@@ -79,6 +80,7 @@ void ctwl_print(CTWL *list){
 }
 
 int main() {
-    CTWL *list = ctwl_create_random(20);
+    CTWL *list = ctwl_create_random(5);
     ctwl_print(list);
+    ctwl_destroy(list);
 }
