@@ -183,12 +183,14 @@ TWN *ctwl_insert_right(CTWL* list, float val){
 
 
 char ctwl_delete(CTWL *list){
-
+    list->cur->next->prev = list->cur->prev;
+    list->cur->prev->next = list->cur->next;
+    ctwl_cur_step_right(list);
+    free(list->cur->prev);
 }
 
 
 int main() {
     CTWL *list = ctwl_create_random(0);
-    ctwl_print(list);
-    ctwl_destroy(list);
+    int *a = malloc(sizeof(int));
 }
