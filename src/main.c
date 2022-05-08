@@ -12,6 +12,15 @@ typedef struct{
 }CTWL;
 
 
+void ctwl_cur_step_right(CTWL *list){
+    list->cur = list->cur->next;
+}
+
+void ctwl_cur_step_left(CTWL *list){
+    list->cur = list->cur->prev;
+}
+
+
 void ctwl_destroy(CTWL *list){
 
     // If list is empty
@@ -79,7 +88,7 @@ CTWL *ctwl_create_random(unsigned int size){
         }
 
         ctwl->cur->next->prev = ctwl->cur;
-        ctwl->cur = ctwl->cur->next;
+        ctwl_cur_step_right(ctwl);
         ctwl->cur->data = rand();
     }
 
@@ -107,15 +116,6 @@ void ctwl_print(CTWL *list){
         aux_cur = aux_cur->next;
         i++;
     }
-}
-
-
-void ctwl_cur_step_right(CTWL *list){
-    list->cur = list->cur->next;
-}
-
-void ctwl_cur_step_left(CTWL *list){
-    list->cur = list->cur->prev;
 }
 
 
