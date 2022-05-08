@@ -31,14 +31,22 @@ CTWL *ctwl_create_random(unsigned int size){
     }
 
     // Create first node TWN in ctwl and set cursor to it
-    ctwl->cur = malloc(sizeof(TWN));
-    if (ctwl->cur == NULL){
+    TWN *first_TWN = malloc(sizeof(TWN));
+    if (first_TWN == NULL){
         return NULL;
     }
 
+
+    ctwl->cur = first_TWN;
+    // Create all other TWN
     for (int i = 0; i < size; i++){
-        ctwl->cur = malloc(sizeof(TWN));
+        ctwl->cur->next = malloc(sizeof(TWN));
+        ctwl->cur->next->prev = ctwl->cur;
+        ctwl->cur = ctwl->cur->next;
     }
+
+    // Link the end to the start
+    ctwl->cur->next =
 
     return ctwl;
 }
