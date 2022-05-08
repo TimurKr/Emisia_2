@@ -36,8 +36,7 @@ CTWL *ctwl_create_random(unsigned int size){
         return NULL;
     }
 
-
-    // Create all other TWN
+    // Create all other TWNs
     ctwl->cur = first_TWN;
     for (int i = 0; i < size; i++){
         ctwl->cur->next = malloc(sizeof(TWN));
@@ -53,10 +52,17 @@ CTWL *ctwl_create_random(unsigned int size){
 }
 
 void ctwl_print(CTWL *list){
+    printf("Cursor: %f", list->cur->data);
 
+    TWN *aux_cur = list->cur->next;
+    unsigned short int i = 1;
+    while (aux_cur != list->cur){
+        printf("Cursor + %d: %f", i, aux_cur->data);
+        aux_cur = aux_cur->next;
+        i++;
+    }
 }
 
 int main() {
-    printf("Hello, World!\n");
-    return 0;
+
 }
