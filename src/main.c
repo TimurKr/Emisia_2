@@ -13,11 +13,13 @@ typedef struct{
 
 
 void ctwl_destroy(CTWL *list){
+
     TWN *aux_cur = list->cur;
     while (aux_cur->next != list->cur){
         aux_cur = aux_cur->next;
         free(aux_cur->prev);
     }
+
     free(aux_cur);
     free(list);
 }
@@ -36,6 +38,7 @@ CTWL *ctwl_create_empty(void){
 }
 
 CTWL *ctwl_create_random(unsigned int size){
+
     // Create structure for ctwl
     CTWL *ctwl = malloc(sizeof(CTWL));
     if (ctwl == NULL){
@@ -51,7 +54,7 @@ CTWL *ctwl_create_random(unsigned int size){
 
     // Create all other TWNs
     ctwl->cur = first_TWN;
-    for (int i = 0; i < size; i++){
+    for (int i = 0; i < size - 1; i++){
 
         ctwl->cur->next = malloc(sizeof(TWN));
         if (ctwl->cur->next == NULL){           // If malloc fails
@@ -76,10 +79,12 @@ CTWL *ctwl_create_random(unsigned int size){
 
 
 void ctwl_print(CTWL *list){
+
     if (list->cur == NULL){
         printf("List is empty.\n");
         return;
     }
+
     printf("Cursor: %f\n", list->cur->data);
 
     TWN *aux_cur = list->cur->next;
