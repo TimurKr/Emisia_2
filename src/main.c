@@ -12,7 +12,9 @@ typedef struct{
 }CTWL;
 
 CTWL *ctwl_create_empty(void){
-
+    CTWL *ctwl = malloc(sizeof(CTWL));
+    ctwl->cur = NULL;
+    return ctwl;
 }
 
 CTWL *ctwl_create_random(unsigned int size){
