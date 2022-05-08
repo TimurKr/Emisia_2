@@ -52,6 +52,10 @@ CTWL *ctwl_create_random(unsigned int size){
     return ctwl;
 }
 
+void ctwl_print(CTWL *list){
+
+}
+
 int main() {
     printf("Hello, World!\n");
     return 0;
