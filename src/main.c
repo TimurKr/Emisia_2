@@ -14,12 +14,20 @@ typedef struct{
 
 void ctwl_destroy(CTWL *list){
 
+    // If list is empty
+    if(list->cur == NULL){
+        free(list);
+        return;
+    }
+
+    // Destroy all TWNs one by one
     TWN *aux_cur = list->cur;
     while (aux_cur->next != list->cur){
         aux_cur = aux_cur->next;
         free(aux_cur->prev);
     }
 
+    // When only the last one is left, destroy it and then the ctwl itself
     free(aux_cur);
     free(list);
 }
@@ -39,6 +47,7 @@ CTWL *ctwl_create_empty(void){
 
 CTWL *ctwl_create_random(unsigned int size){
 
+    // Protection against empty list
     if (size == 0){
         return ctwl_create_empty();
     }
