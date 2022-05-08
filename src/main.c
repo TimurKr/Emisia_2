@@ -5,12 +5,13 @@ typedef struct TWN{
     float data;
     struct TWN *prev;
     struct TWN *next;
-}TWN;
+}TWN;   //Ako fungujú tieto structy????????????????????????????????????????
 
 typedef struct{
     TWN *cur;
 }CTWL;
 
+//---------------------Cursor Movement------------------------
 
 void ctwl_cur_step_right(CTWL *list){
     list->cur = list->cur->next;
@@ -20,6 +21,7 @@ void ctwl_cur_step_left(CTWL *list){
     list->cur = list->cur->prev;
 }
 
+//---------------------List Destroy------------------------
 
 void ctwl_destroy(CTWL *list){
 
@@ -41,6 +43,29 @@ void ctwl_destroy(CTWL *list){
     free(list);
 }
 
+//---------------------Element Delete------------------------
+
+char ctwl_delete(CTWL *list){ //Ako spraviť return values???????????????????????????????
+
+    // Protection against empty lists
+    if (list->cur == NULL){
+        return 0;
+    }
+        // Protection against lists size 1
+    else if (list->cur->next == list->cur){
+        free(list->cur);
+        list->cur = NULL;
+        return 1;
+    }
+
+    // Correct neighbouring TWN pointers
+    list->cur->next->prev = list->cur->prev;
+    list->cur->prev->next = list->cur->next;
+    ctwl_cur_step_right(list);
+    free(list->cur->prev);
+}
+
+//---------------------List Create------------------------
 
 CTWL *ctwl_create_empty(void){
 
@@ -99,6 +124,7 @@ CTWL *ctwl_create_random(unsigned int size){
     return ctwl;
 }
 
+//---------------------List Print------------------------
 
 void ctwl_print(CTWL *list){
 
@@ -118,6 +144,7 @@ void ctwl_print(CTWL *list){
     }
 }
 
+//---------------------Element Insertion------------------------
 
 TWN *ctwl_insert_left(CTWL* list, float val){
     // Allocate memory
@@ -179,27 +206,6 @@ TWN *ctwl_insert_right(CTWL* list, float val){
         list->cur->next = ptr;
     }
     return ptr;
-}
-
-
-char ctwl_delete(CTWL *list){ //Ako spraviť return values???????????????????????????????
-
-    // Protection against empty lists
-    if (list->cur == NULL){
-        return 0;
-    }
-    // Protection against lists size 1
-    else if (list->cur->next == list->cur){
-        free(list->cur);
-        list->cur = NULL;
-        return 1;
-    }
-
-    // Correct neighbouring TWN pointers
-    list->cur->next->prev = list->cur->prev;
-    list->cur->prev->next = list->cur->next;
-    ctwl_cur_step_right(list);
-    free(list->cur->prev);
 }
 
 
