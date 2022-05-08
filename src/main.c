@@ -182,7 +182,20 @@ TWN *ctwl_insert_right(CTWL* list, float val){
 }
 
 
-char ctwl_delete(CTWL *list){
+char ctwl_delete(CTWL *list){ //Ako spraviť return values???????????????????????????????
+
+    // Protection against empty lists
+    if (list->cur == NULL){
+        return 0;
+    }
+    // Protection against lists size 1
+    else if (list->cur->next == list->cur){
+        free(list->cur);
+        list->cur = NULL;
+        return 1;
+    }
+
+    // Correct neighbouring TWN pointers
     list->cur->next->prev = list->cur->prev;
     list->cur->prev->next = list->cur->next;
     ctwl_cur_step_right(list);
