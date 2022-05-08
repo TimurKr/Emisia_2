@@ -52,12 +52,16 @@ CTWL *ctwl_create_random(unsigned int size){
     return ctwl;
 }
 
+void ctwl_destroy(CTWL *list){
+
+}
+
 void ctwl_print(CTWL *list){
     if (list->cur == NULL){
         printf("List is empty.\n");
         return;
     }
-    printf("Cursor: %f\n", list->cur->data);      // Needs protection against empty CTWL
+    printf("Cursor: %f\n", list->cur->data);
 
     TWN *aux_cur = list->cur->next;
     unsigned short int i = 1;
@@ -69,6 +73,6 @@ void ctwl_print(CTWL *list){
 }
 
 int main() {
-    CTWL *list = ctwl_create_random(5);
+    CTWL *list = ctwl_create_random(20);
     ctwl_print(list);
 }
