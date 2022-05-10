@@ -209,10 +209,15 @@ char ctwl_interpolate_linear(CTWL* list){
     ctwl_cur_step_right(list);
     while(org_cur != list->cur){
         ctwl_print(list);
-        ctwl_insert_left(list, (list->cur->prev->data + list->cur->next->data) / 2);
+        printf("\n");
+        ctwl_insert_left(list, ((list->cur->prev->data + list->cur->data)) / 2);
+        ctwl_print(list);
+        printf("\n");
         ctwl_cur_step_right(list);
     }
     ctwl_print(list);
+    printf("\n");
+    ctwl_insert_left(list, ((list->cur->prev->data + list->cur->data)) / 2);
     return 'O';
 }
 
@@ -223,5 +228,13 @@ char ctwl_interpolate_linear(CTWL* list){
 
 int main() {
     CTWL *list = ctwl_create_empty();
-
+    ctwl_insert_left(list, 1);
+    ctwl_insert_left(list, 2);
+    ctwl_insert_left(list, 3);
+    ctwl_insert_left(list, 4);
+    ctwl_print(list);
+    printf("\n");
+    ctwl_interpolate_linear(list);
+    ctwl_print(list);
+    printf("\n");
 }
