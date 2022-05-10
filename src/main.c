@@ -21,31 +21,9 @@ void ctwl_cur_step_left(CTWL *list){
     list->cur = list->cur->prev;
 }
 
-//---------------------List Destroy------------------------
-
-void ctwl_destroy(CTWL *list){
-
-    // If list is empty
-    if(list->cur == NULL){
-        free(list);
-        return;
-    }
-
-    // Destroy all TWNs one by one
-    TWN *aux_cur = list->cur;
-    while (aux_cur->next != list->cur){
-        aux_cur = aux_cur->next;
-        free(aux_cur->prev);
-    }
-
-    // When only the last one is left, destroy it and then the ctwl itself
-    free(aux_cur);
-    free(list);
-}
-
 //---------------------Element Delete------------------------
 
-char ctwl_delete(CTWL *list){ //Ako spraviť return values???????????????????????????????
+char ctwl_delete(CTWL *list){           //Ako spraviť return values???????????????????????????????
 
     // Protection against empty lists
     if (list->cur == NULL){
@@ -59,10 +37,24 @@ char ctwl_delete(CTWL *list){ //Ako spraviť return values??????????????????????
     }
 
     // Correct neighbouring TWN pointers
-    list->cur->next->prev = list->cur->prev;
-    list->cur->prev->next = list->cur->next;
+    TWN *aux_cur = list->cur;
+    aux_cur->next->prev = aux_cur->prev;
+    aux_cur->prev->next = aux_cur->next;
     ctwl_cur_step_right(list);
-    free(list->cur->prev);
+    free(aux_cur);
+    return 2;
+}
+
+//---------------------List Destroy------------------------
+
+void ctwl_destroy(CTWL *list){
+
+    // Keep deleting elements until none left
+    while (ctwl_delete(list) != 0){}
+
+    // Delete list itself
+    free(list);
+
 }
 
 //---------------------List Create------------------------
@@ -210,6 +202,9 @@ TWN *ctwl_insert_right(CTWL* list, float val){
 
 
 int main() {
-    CTWL *list = ctwl_create_random(0);
-    int *a = malloc(sizeof(int));
+    CTWL *list = ctwl_create_random(5);
+    ctwl_print(list);
+    printf("%d\n", ctwl_delete(list));
+    ctwl_print(list);
+    ctwl_destroy(list);
 }
