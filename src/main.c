@@ -202,6 +202,16 @@ TWN *ctwl_insert_right(CTWL* list, float val){
     return ptr;
 }
 
+//---------------------Interpolačná funkcia, samotné zadanie------------------------
+
+char ctwl_interpolate_linear(CTWL* list){
+
+}
+
+
+
+//---------------------Main------------------------
+
 
 int main() {
     CTWL *list = ctwl_create_random(5);
