@@ -60,6 +60,7 @@ void ctwl_destroy(CTWL *list){
 //---------------------List Create------------------------
 
 CTWL *ctwl_create_empty(void){
+    //Returns pointer to the created list or NULL if fails
 
     // Create structure for ctwl
     CTWL *ctwl = malloc(sizeof(CTWL));
@@ -72,6 +73,7 @@ CTWL *ctwl_create_empty(void){
 }
 
 CTWL *ctwl_create_random(unsigned int size){
+    //Returns pointer to the created list or NULL if fails
 
     // Protection against empty list
     if (size == 0){
@@ -204,7 +206,29 @@ TWN *ctwl_insert_right(CTWL* list, float val){
 int main() {
     CTWL *list = ctwl_create_random(5);
     ctwl_print(list);
-    printf("%d\n", ctwl_delete(list));
+    printf("\nDelete:\n");
+    ctwl_delete(list);
     ctwl_print(list);
-    ctwl_destroy(list);
+    printf("\nInsert right:\n");
+    ctwl_insert_right(list, 5.8);
+    ctwl_print(list);
+    printf("\nInsert Left:\n");
+    ctwl_insert_left(list, 4.2);
+    ctwl_print(list);
+    printf("\nStep Right:\n");
+    ctwl_cur_step_right(list);
+    ctwl_print(list);
+    printf("\nStep Right:\n");
+    ctwl_cur_step_right(list);
+    ctwl_print(list);
+    printf("\nStep Right:\n");
+    ctwl_cur_step_right(list);
+    ctwl_print(list);
+    printf("\nStep Left:\n");
+    ctwl_cur_step_left(list);
+    ctwl_print(list);
+    printf("\nDelete:\n");
+    ctwl_delete(list);
+    ctwl_print(list);
+    printf("\n");
 }
