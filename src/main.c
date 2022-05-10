@@ -205,7 +205,15 @@ TWN *ctwl_insert_right(CTWL* list, float val){
 //---------------------Interpolačná funkcia, samotné zadanie------------------------
 
 char ctwl_interpolate_linear(CTWL* list){
-
+    TWN *org_cur = list->cur;
+    ctwl_cur_step_right(list);
+    while(org_cur != list->cur){
+        ctwl_print(list);
+        ctwl_insert_left(list, (list->cur->prev->data + list->cur->next->data) / 2);
+        ctwl_cur_step_right(list);
+    }
+    ctwl_print(list);
+    return 'O';
 }
 
 
@@ -214,31 +222,6 @@ char ctwl_interpolate_linear(CTWL* list){
 
 
 int main() {
-    CTWL *list = ctwl_create_random(5);
-    ctwl_print(list);
-    printf("\nDelete:\n");
-    ctwl_delete(list);
-    ctwl_print(list);
-    printf("\nInsert right:\n");
-    ctwl_insert_right(list, 5.8);
-    ctwl_print(list);
-    printf("\nInsert Left:\n");
-    ctwl_insert_left(list, 4.2);
-    ctwl_print(list);
-    printf("\nStep Right:\n");
-    ctwl_cur_step_right(list);
-    ctwl_print(list);
-    printf("\nStep Right:\n");
-    ctwl_cur_step_right(list);
-    ctwl_print(list);
-    printf("\nStep Right:\n");
-    ctwl_cur_step_right(list);
-    ctwl_print(list);
-    printf("\nStep Left:\n");
-    ctwl_cur_step_left(list);
-    ctwl_print(list);
-    printf("\nDelete:\n");
-    ctwl_delete(list);
-    ctwl_print(list);
-    printf("\n");
+    CTWL *list = ctwl_create_empty();
+
 }
