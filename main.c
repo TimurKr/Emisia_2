@@ -19,7 +19,7 @@ void ctwl_cur_step_right(CTWL *list) {
 
 void ctwl_print(CTWL *list) {
 
-    if (list->cur == NULL){
+    if (list->cur == NULL) {
         printf("List is empty.\n");
         return;
     }
@@ -28,7 +28,7 @@ void ctwl_print(CTWL *list) {
 
     TWN *aux_cur = list->cur->next;
     unsigned short int i = 1;
-    while (aux_cur != list->cur){
+    while (aux_cur != list->cur) {
         printf("Cursor + %d: \t%f\n", i, aux_cur->data);
         aux_cur = aux_cur->next;
         i++;
@@ -37,15 +37,15 @@ void ctwl_print(CTWL *list) {
 
 //---------------------Element Insertion------------------------
 
-TWN *ctwl_insert_left(CTWL* list, float val){
+TWN *ctwl_insert_left(CTWL *list, float val) {
     // Allocate memory
     TWN *ptr = malloc(sizeof(TWN));
-    if (ptr == 0){
+    if (ptr == 0) {
         return 0;
     }
 
     // Protection against empty lists
-    if (list->cur == NULL){
+    if (list->cur == NULL) {
         // Set up the TWN
         ptr->data = val;
         ptr->prev = ptr;
@@ -53,9 +53,7 @@ TWN *ctwl_insert_left(CTWL* list, float val){
 
         // Set cursor
         list->cur = ptr;
-    }
-
-    else {
+    } else {
         // Set up the TWN
         ptr->data = val;
         ptr->prev = list->cur->prev;
@@ -68,15 +66,15 @@ TWN *ctwl_insert_left(CTWL* list, float val){
     return ptr;
 }
 
-TWN *ctwl_insert_right(CTWL* list, float val){
+TWN *ctwl_insert_right(CTWL *list, float val) {
     // Allocate memory
     TWN *ptr = malloc(sizeof(TWN));
-    if (ptr == 0){
+    if (ptr == 0) {
         return 0;
     }
 
     // Protection against empty lists
-    if (list->cur == NULL){
+    if (list->cur == NULL) {
         // Set up the TWN
         ptr->data = val;
         ptr->prev = ptr;
@@ -84,9 +82,7 @@ TWN *ctwl_insert_right(CTWL* list, float val){
 
         // Set cursor
         list->cur = ptr;
-    }
-
-    else {
+    } else {
         // Set up the TWN
         ptr->data = val;
         ptr->prev = list->cur;
@@ -101,14 +97,14 @@ TWN *ctwl_insert_right(CTWL* list, float val){
 
 //---------------------Interpolačná funkcia, samotné zadanie------------------------
 
-char ctwl_interpolate_linear(CTWL* list){
+char ctwl_interpolate_linear(CTWL *list) {
 
     // Needs protection against short lists
 
 
     TWN *org_cur = list->cur;
     ctwl_cur_step_right(list);
-    while(org_cur != list->cur){
+    while (org_cur != list->cur) {
         ctwl_insert_left(list, ((list->cur->prev->data + list->cur->data)) / 2);
         ctwl_cur_step_right(list);
     }
@@ -128,4 +124,5 @@ int main() {
     ctwl_interpolate_linear(list);
     ctwl_print(list);
     printf("\n");
+    printf(".");
 }

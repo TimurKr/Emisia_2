@@ -2,7 +2,7 @@
 // Created by Timur Kramar on 16/05/2022.
 //
 
-typedef struct TWN{
+typedef struct TWN {
     float data;
     struct TWN *prev;
     struct TWN *next;

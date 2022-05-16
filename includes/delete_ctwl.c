@@ -10,11 +10,11 @@
 char ctwl_delete(CTWL *list) {           //Ako spraviť return values???????????????????????????????
 
     // Protection against empty lists
-    if (list->cur == NULL){
+    if (list->cur == NULL) {
         return 0;
     }
         // Protection against lists size 1
-    else if (list->cur->next == list->cur){
+    else if (list->cur->next == list->cur) {
         free(list->cur);
         list->cur = NULL;
         return 1;
@@ -34,7 +34,7 @@ char ctwl_delete(CTWL *list) {           //Ako spraviť return values???????????
 void ctwl_destroy(CTWL *list) {
 
     // Keep deleting elements until none left
-    while (ctwl_delete(list) != 0){}
+    while (ctwl_delete(list) != 0) {}
 
     // Delete list itself
     free(list);
