@@ -1,29 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct TWN{
-    float data;
-    struct TWN *prev;
-    struct TWN *next;
-}TWN;   //Ako fungujú tieto structy????????????????????????????????????????
+#include "ctwl.h"
 
-typedef struct{
-    TWN *cur;
-}CTWL;
+// Add define for return values
 
 //---------------------Cursor Movement------------------------
 
-void ctwl_cur_step_right(CTWL *list){
-    list->cur = list->cur->next;
+void ctwl_cur_step_left(CTWL *list) {
+    list->cur = list->cur->prev;
 }
 
-void ctwl_cur_step_left(CTWL *list){
-    list->cur = list->cur->prev;
+void ctwl_cur_step_right(CTWL *list) {
+    list->cur = list->cur->next;
 }
 
 //---------------------Element Delete------------------------
 
-char ctwl_delete(CTWL *list){           //Ako spraviť return values???????????????????????????????
+char ctwl_delete(CTWL *list) {           //Ako spraviť return values???????????????????????????????
 
     // Protection against empty lists
     if (list->cur == NULL){
@@ -47,7 +41,7 @@ char ctwl_delete(CTWL *list){           //Ako spraviť return values????????????
 
 //---------------------List Destroy------------------------
 
-void ctwl_destroy(CTWL *list){
+void ctwl_destroy(CTWL *list) {
 
     // Keep deleting elements until none left
     while (ctwl_delete(list) != 0){}
@@ -57,70 +51,9 @@ void ctwl_destroy(CTWL *list){
 
 }
 
-//---------------------List Create------------------------
-
-CTWL *ctwl_create_empty(void){
-    //Returns pointer to the created list or NULL if fails
-
-    // Create structure for ctwl
-    CTWL *ctwl = malloc(sizeof(CTWL));
-    if (ctwl == NULL){
-        return NULL;
-    }
-
-    ctwl->cur = NULL;
-    return ctwl;
-}
-
-CTWL *ctwl_create_random(unsigned int size){
-    //Returns pointer to the created list or NULL if fails
-
-    // Protection against empty list
-    if (size == 0){
-        return ctwl_create_empty();
-    }
-
-    // Create structure for ctwl
-    CTWL *ctwl = malloc(sizeof(CTWL));
-    if (ctwl == NULL){
-        return NULL;
-    }
-
-    // Create first node TWN in ctwl and set cursor to it
-    TWN *first_TWN = malloc(sizeof(TWN));
-    if (first_TWN == NULL){
-        return NULL;
-    }
-    first_TWN->data = (float) rand();
-
-    // Create all other TWNs
-    ctwl->cur = first_TWN;
-    for (int i = 0; i < size - 1; i++){
-
-        ctwl->cur->next = malloc(sizeof(TWN));
-        if (ctwl->cur->next == NULL){           // If malloc fails
-            ctwl->cur->next = first_TWN;        // close ctwl,
-            first_TWN->prev = ctwl->cur;
-
-            ctwl_destroy(ctwl);                 // destroy it
-            return NULL;                        // and return error
-        }
-
-        ctwl->cur->next->prev = ctwl->cur;
-        ctwl_cur_step_right(ctwl);
-        ctwl->cur->data = (float) rand();
-    }
-
-    // Link the end with the start
-    ctwl->cur->next = first_TWN;
-    first_TWN->prev = ctwl->cur;
-
-    return ctwl;
-}
-
 //---------------------List Print------------------------
 
-void ctwl_print(CTWL *list){
+void ctwl_print(CTWL *list) {
 
     if (list->cur == NULL){
         printf("List is empty.\n");
@@ -205,18 +138,16 @@ TWN *ctwl_insert_right(CTWL* list, float val){
 //---------------------Interpolačná funkcia, samotné zadanie------------------------
 
 char ctwl_interpolate_linear(CTWL* list){
+
+    // Needs protection against short lists
+
+
     TWN *org_cur = list->cur;
     ctwl_cur_step_right(list);
     while(org_cur != list->cur){
-        ctwl_print(list);
-        printf("\n");
         ctwl_insert_left(list, ((list->cur->prev->data + list->cur->data)) / 2);
-        ctwl_print(list);
-        printf("\n");
         ctwl_cur_step_right(list);
     }
-    ctwl_print(list);
-    printf("\n");
     ctwl_insert_left(list, ((list->cur->prev->data + list->cur->data)) / 2);
     return 'O';
 }
@@ -227,11 +158,7 @@ char ctwl_interpolate_linear(CTWL* list){
 
 
 int main() {
-    CTWL *list = ctwl_create_empty();
-    ctwl_insert_left(list, 1);
-    ctwl_insert_left(list, 2);
-    ctwl_insert_left(list, 3);
-    ctwl_insert_left(list, 4);
+    CTWL *list = ctwl_create_random(10);
     ctwl_print(list);
     printf("\n");
     ctwl_interpolate_linear(list);
