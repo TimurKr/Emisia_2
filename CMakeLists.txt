@@ -16,4 +16,5 @@ link_directories(includes)
 
 # links library made in a diferent CMakeLists.txt to target {P_N}
 target_link_libraries(${PROJECT_NAME} PRIVATE
-        create_ctwl_lib delete_ctwl_lib cur_move_ctwl_lib io_ctwl_lib)
+        create_ctwl_lib delete_ctwl_lib cur_move_ctwl_lib
+        io_ctwl_lib elem_insert_ctwl_lib)

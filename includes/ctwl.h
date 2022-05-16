@@ -28,3 +28,8 @@ void ctwl_cur_step_right(CTWL *list);
 void ctwl_cur_step_left(CTWL *list);
 
 void ctwl_print(CTWL *list);
+
+TWN *ctwl_insert_left(CTWL *list, float val);
+
+TWN *ctwl_insert_right(CTWL *list, float val);
+
