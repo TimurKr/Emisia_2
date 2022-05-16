@@ -10,7 +10,7 @@ CTWL *ctwl_create_empty(void) {
     // Create structure for ctwl
     CTWL *ctwl = malloc(sizeof(CTWL));
     if (ctwl == NULL) {
-        return NULL;
+        return CREATE_CTWL_ERROR;
     }
 
     ctwl->cur = NULL;
@@ -28,13 +28,14 @@ CTWL *ctwl_create_random(unsigned int size) {
     // Create structure for ctwl
     CTWL *ctwl = malloc(sizeof(CTWL));
     if (ctwl == NULL) {
-        return NULL;
+        return CREATE_CTWL_ERROR;
     }
 
-    // Create first node TWN in ctwl and set cursor to it
+    // Create first node TWN
     TWN *first_TWN = malloc(sizeof(TWN));
     if (first_TWN == NULL) {
-        return NULL;
+        free(ctwl);
+        return CREATE_CTWL_ERROR;
     }
     first_TWN->data = (float) rand();
 
@@ -43,12 +44,12 @@ CTWL *ctwl_create_random(unsigned int size) {
     for (int i = 0; i < size - 1; i++) {
 
         ctwl->cur->next = malloc(sizeof(TWN));
-        if (ctwl->cur->next == NULL) {           // If malloc fails
+        if (ctwl->cur->next == NULL) {          // If malloc fails
             ctwl->cur->next = first_TWN;        // close ctwl,
             first_TWN->prev = ctwl->cur;
 
             ctwl_destroy(ctwl);                 // destroy it
-            return NULL;                        // and return error
+            return CREATE_CTWL_ERROR;           // and return error
         }
 
         ctwl->cur->next->prev = ctwl->cur;

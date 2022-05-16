@@ -9,8 +9,8 @@
 TWN *ctwl_insert_left(CTWL *list, float val) {
     // Allocate memory
     TWN *ptr = malloc(sizeof(TWN));
-    if (ptr == 0) {
-        return 0;
+    if (ptr == NULL) {
+        return INSERT_ELEM_ERROR;
     }
 
     // Protection against empty lists
@@ -38,8 +38,8 @@ TWN *ctwl_insert_left(CTWL *list, float val) {
 TWN *ctwl_insert_right(CTWL *list, float val) {
     // Allocate memory
     TWN *ptr = malloc(sizeof(TWN));
-    if (ptr == 0) {
-        return 0;
+    if (ptr == NULL) {
+        return INSERT_ELEM_ERROR;
     }
 
     // Protection against empty lists
