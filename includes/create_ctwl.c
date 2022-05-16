@@ -2,7 +2,6 @@
 // Created by Timur Kramar on 16/05/2022.
 //
 
-#include <stdlib.h>
 #include "ctwl.h"
 
 CTWL *ctwl_create_empty(void) {

@@ -5,35 +5,6 @@
 
 // Add define for return values
 
-//---------------------Cursor Movement------------------------
-
-void ctwl_cur_step_left(CTWL *list) {
-    list->cur = list->cur->prev;
-}
-
-void ctwl_cur_step_right(CTWL *list) {
-    list->cur = list->cur->next;
-}
-
-//---------------------List Print------------------------
-
-void ctwl_print(CTWL *list) {
-
-    if (list->cur == NULL) {
-        printf("List is empty.\n");
-        return;
-    }
-
-    printf("Cursor: \t\t%f\n", list->cur->data);
-
-    TWN *aux_cur = list->cur->next;
-    unsigned short int i = 1;
-    while (aux_cur != list->cur) {
-        printf("Cursor + %d: \t%f\n", i, aux_cur->data);
-        aux_cur = aux_cur->next;
-        i++;
-    }
-}
 
 //---------------------Element Insertion------------------------
 

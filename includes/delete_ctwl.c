@@ -3,7 +3,6 @@
 //
 
 #include "ctwl.h"
-#include <stdlib.h>
 
 //---------------------Element Delete------------------------
 

@@ -2,6 +2,9 @@
 // Created by Timur Kramar on 16/05/2022.
 //
 
+#include <stdlib.h>
+#include <stdio.h>
+
 typedef struct TWN {
     float data;
     struct TWN *prev;
