@@ -8,9 +8,11 @@
 #define CREATE_CTWL_ERROR 0
 #define INSERT_ELEM_ERROR 0
 
-#define DELETE_ELEM_ERROR_LIST_LEN_0 0
-#define DELETE_ELEM_NONE_LEFT 1
-#define DELETE_ELEM_SUCCESS 2
+#define DELETE_ELEM_FAIL 0
+#define DELETE_ELEM_SUCCESS 1
+
+#define CTWL_OK 0
+#define CTWL_PROBLEM 1
 
 
 typedef struct TWN {

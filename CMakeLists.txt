@@ -3,7 +3,7 @@ project(Emisia_2 C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(${PROJECT_NAME} main.c)
+add_executable(${PROJECT_NAME} src/main.c)
 
 # look for another CMakeLists.txt in directory includes
 add_subdirectory(includes)

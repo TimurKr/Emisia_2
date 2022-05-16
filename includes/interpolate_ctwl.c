@@ -8,7 +8,11 @@
 
 char ctwl_interpolate_linear(CTWL *list) {
 
-    // Needs protection against short lists
+    if (list->cur == NULL){                         // if list is empty
+        return CTWL_PROBLEM;
+    } else if (list->cur == list->cur->next) {      // if length of list is 1
+        return CTWL_PROBLEM;
+    }
 
     TWN *org_cur = list->cur;
     ctwl_cur_step_right(list);
@@ -17,5 +21,5 @@ char ctwl_interpolate_linear(CTWL *list) {
         ctwl_cur_step_right(list);
     }
     ctwl_insert_left(list, ((list->cur->prev->data + list->cur->data)) / 2);
-    return 'O';
+    return CTWL_OK;
 }
