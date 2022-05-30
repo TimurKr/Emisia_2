@@ -8,6 +8,8 @@
 
 char ctwl_delete(CTWL *list) {           //Ako spraviť return values???????????????????????????????
 
+    TWN *aux_cur = list->cur;
+
     // Protection against empty lists
     if (list->cur == NULL) {
         return DELETE_ELEM_FAIL;
@@ -20,7 +22,6 @@ char ctwl_delete(CTWL *list) {           //Ako spraviť return values???????????
     }
 
     // Correct neighbouring TWN pointers
-    TWN *aux_cur = list->cur;
     aux_cur->next->prev = aux_cur->prev;
     aux_cur->prev->next = aux_cur->next;
     ctwl_cur_step_right(list);
