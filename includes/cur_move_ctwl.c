@@ -7,9 +7,15 @@
 //---------------------Cursor Movement------------------------
 
 void ctwl_cur_step_left(CTWL *list) {
+    if (list->cur == NULL){
+        return;
+    }
     list->cur = list->cur->prev;
 }
 
 void ctwl_cur_step_right(CTWL *list) {
+    if (list->cur == NULL){
+        return;
+    }
     list->cur = list->cur->next;
 }
